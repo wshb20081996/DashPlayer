@@ -1,7 +1,7 @@
 <template>
   <mdb-container>
     <mdb-row>
-      <mdb-col md="6" v-bind:key="video.id" v-for="video in media.h265">
+      <mdb-col md="6" v-bind:key="video.id" v-for="video in media">
         <div class="embed-responsive embed-responsive-16by9" style="margin: 10px;">
             <div class="embed-responsive-item">
             <div v-if="is360Video == true">
@@ -42,20 +42,21 @@ import VRDashStreamer from "./VRDashStreamer.vue";
 export default {
   name: "AVCDashStreamer",
   props: {
-     is360Video: {
+    is360Video: {
     default: false,
   },
-  media: {
-    default: "http://localhost/360DashPlayer/media/2019_Oberwiesenthal/h265/oberwiesenthal.mpd"
-  }
+    media : {}
   },
-
   components: {
     mdbContainer,
     mdbRow,
     mdbCol,
     VRDashStreamer
   },
+   mounted() {
+    console.log("media: "+JSON.stringify(this.media[0].url));
+
+   },
   methods: {
     startVideo : function(video){
       console.log("video: ",video);
