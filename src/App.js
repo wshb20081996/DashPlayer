@@ -21,7 +21,7 @@ export default {
     methods: {
         loadMedia : function() {
             axios
-            .get("http://h2857701.stratoserver.net/DashPlayer/media/media.json")
+            .get("http://localhost/DashPlayer/media/media.json")
             .then(response => {
                 this.media = response.data.contents;
                 console.log("axios media: "+JSON.stringify(this.media));

@@ -5,7 +5,7 @@
         <div class="embed-responsive embed-responsive-16by9" style="margin: 10px;">
             <div class="embed-responsive-item">
             <div v-if="is360Video == true">
-              <VRDashStreamer></VRDashStreamer>
+              <VRDashStreamer v-bind:url="video.url"></VRDashStreamer>
             </div>
            <div v-else>
                 <video
@@ -54,7 +54,7 @@ export default {
     VRDashStreamer
   },
    mounted() {
-    console.log("media: "+JSON.stringify(this.media[0].url));
+    console.log("HEVCDashStreamer is mounted with media: "+JSON.stringify(this.media));
 
    },
   methods: {

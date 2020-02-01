@@ -5,7 +5,7 @@
         <div class="embed-responsive embed-responsive-16by9" style="margin: 10px;">
             <div class="embed-responsive-item">
             <div v-if="is360Video == true">
-              <VRDashStreamer></VRDashStreamer>
+              <VRDashStreamer v-bind:url="video.url"></VRDashStreamer>
             </div>
            <div v-else>
                 <video
@@ -14,7 +14,7 @@
             controls
             webkit-playsinline
             allowfullscreen
-            v-bind:src="video.url"
+            src="http://localhost/DashPlayer/media/2019_Fehrbellin/h264/fehrbellin.mpd"
           ></video>
           <div v-if="video.omnidirectional" class="embed-responsive-item">
            <b-button class="float-right " :pressed.sync="is360Video">View in VR</b-button>
@@ -54,7 +54,7 @@ export default {
     VRDashStreamer
   },
    mounted() {
-    console.log("media: "+JSON.stringify(this.media[0].url));
+    console.log("AVCDashStreamer is mounted with media: "+JSON.stringify(this.media));
 
    },
   methods: {

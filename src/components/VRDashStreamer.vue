@@ -1,5 +1,5 @@
 <template>
-  <a-scene v-on:click="startVideo()">
+  <a-scene v-on:click="startVideo(url)">
             <a-assets>
                <video data-dashjs-player id="dashjs" class="player" webkit-playsinline></video>
           
@@ -15,20 +15,32 @@ import "dashjs";
 import "videojs-contrib-dash";
 export default {
   name: "VRDashStreamer",
+  props: {
+    url : {}
+  },
   mounted : function(){
+    console.log("VRDashStreamer is mounted with media: "+JSON.stringify(this.url));
+    
   },
   methods: {
-    startVideo: function(){
-        var player = videojs('dashjs')
+    startVideo: function(url){
+      const options = {
+         html5: {
+          nativeCaptions: false
+        }
+      };
+
+        var player = videojs('dashjs',options)
         var readyState = player.readyState();
         console.log("State: "+readyState);
         if(readyState == 0){
           player.ready(function () {
-          player.src({
-          src: 'http://localhost/360DashPlayer/media/2019_Oberwiesenthal/h264/oberwiesenthal.mpd',
-          type: 'application/dash+xml'
-        })
-        player.play()
+            console.log("url:"+url);
+            player.src({
+            src: url,
+            type: 'application/dash+xml'
+          })
+          player.play()
         });
         }
   }    
