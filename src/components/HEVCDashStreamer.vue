@@ -4,10 +4,7 @@
       <mdb-col md="6" v-bind:key="video.id" v-for="video in media">
         <div class="embed-responsive embed-responsive-16by9" style="margin: 10px;">
             <div class="embed-responsive-item">
-            <div v-if="is360Video == true">
-              <VRDashStreamer v-bind:url="video.url"></VRDashStreamer>
-            </div>
-           <div v-else>
+           <div>
                 <video
             id="video.id"
             data-dashjs-player
@@ -18,6 +15,9 @@
           ></video>
           <div v-if="video.omnidirectional" class="embed-responsive-item">
            <b-button class="float-right " :pressed.sync="is360Video">View in VR</b-button>
+           <div v-if="is360Video == true">
+              <VRDashStreamer v-bind:url="video.url"></VRDashStreamer>
+            </div>
           </div> 
            </div>
            </div>     
@@ -54,6 +54,7 @@ export default {
     VRDashStreamer
   },
    mounted() {
+    this.is360Video = false;
     console.log("HEVCDashStreamer is mounted with media: "+JSON.stringify(this.media));
 
    },
